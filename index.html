@@ -21,6 +21,13 @@
       componentProps: {
         title: '医疗合规快查',
       },
+      auth: {
+        type: 'token',
+        token: 'pat_okkMDNqzycK9zrGe2GQ7XXcHiPSd1OjyyAztyOonGrJXJcsaP3ifHN5fN3KCiVeN',
+        onRefreshToken: function () {
+          return 'pat_okkMDNqzycK9zrGe2GQ7XXcHiPSd1OjyyAztyOonGrJXJcsaP3ifHN5fN3KCiVeN';
+        }
+      }
     });
   </script>
 
