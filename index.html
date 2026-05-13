@@ -10,29 +10,18 @@
 <script>
 new CozeWebSDK.WebChatClient({
   config: {
-    botId: '7637385009837506595',
+    bot_id: '7637385009837506595',
+  },
+  componentProps: {
+    title: '医疗合规快查',
   },
   auth: {
     type: 'token',
     token: 'pat_okkMDNqzycK9zrGe2GQ7XXcHiPSd1OjyyAztyOonGrJXJcsaP3ifHN5fN3KCiVeN',
-    onRefreshToken: async () => 'pat_okkMDNqzycK9zrGe2GQ7XXcHiPSd1OjyyAztyOonGrJXJcsaP3ifHN5fN3KCiVeN',
-  },
-  userInfo: {
-    id: 'user001',
-    nickname: '用户',
-  },
-  ui: {
-    base: {
-      layout: 'pc',
-      lang: 'zh-CN',
-    },
-    asstBtn: {
-      isNeed: true,
-    },
-    chatBot: {
-      title: '医疗合规快查',
-    },
-  },
+    onRefreshToken: function () {
+      return 'pat_okkMDNqzycK9zrGe2GQ7XXcHiPSd1OjyyAztyOonGrJXJcsaP3ifHN5fN3KCiVeN'
+    }
+  }
 });
 </script>
 </body>
