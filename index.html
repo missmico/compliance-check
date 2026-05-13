@@ -1,3 +1,6 @@
+好，用新token替换，代码如下：
+
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -18,12 +21,15 @@ new CozeWebSDK.WebChatClient({
   },
   auth: {
     type: 'token',
-    token: 'pat_okkMDNqzycK9zrGe2GQ7XXcHiPSd1OjyyAztyOonGrJXJcsaP3ifHN5fN3KCiVeN',
+    token: 'pat_QCl9KAWMWg2U0BUpVK0CHSPCkD4kb3oZDzBfdcZ6WhpLpmqa6grlhVuBK4E8vQbm',
     onRefreshToken: function () {
-      return 'pat_okkMDNqzycK9zrGe2GQ7XXcHiPSd1OjyyAztyOonGrJXJcsaP3ifHN5fN3KCiVeN'
+      return 'pat_QCl9KAWMWg2U0BUpVK0CHSPCkD4kb3oZDzBfdcZ6WhpLpmqa6grlhVuBK4E8vQbm'
     }
   }
 });
 </script>
 </body>
 </html>
+```
+
+替换后刷新试试，同时也去**Playground**里用这个新token再跑一次~
