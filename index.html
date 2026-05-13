@@ -10,7 +10,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; width: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
 
-    /* 加载页面 */
     #loading-screen {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -27,18 +26,10 @@
       animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* 错误提示 */
-    #error-tip {
-      display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-      background: rgba(0,0,0,0.75); color: white; padding: 10px 20px;
-      border-radius: 20px; font-size: 13px; z-index: 10000;
-    }
   </style>
 </head>
 <body>
 
-  <!-- 加载页面 -->
   <div id="loading-screen">
     <div class="logo">⚖️</div>
     <h1>医疗合规快查</h1>
@@ -46,80 +37,41 @@
     <div class="spinner"></div>
   </div>
 
-  <!-- 错误提示 -->
-  <div id="error-tip"></div>
-
-  <!-- ======================== 配置区 ======================== -->
-  <script>
-    const CONFIG = {
-      botId: '7637385009837506595',
-      token: 'pat_cEvmt5zQ2YL8WJzSRUihhV7IQoNe9A1XwyVqnHzDGZx3oXZhyCaW3NlYSGrP24Hn',
-    };
-  </script>
-  <!-- ======================== 配置区结束 ======================== -->
-
-  <!-- Coze Chat SDK（升级到1.2.0-beta.6） -->
-  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
+  <!-- Coze Chat SDK 1.2.0-beta.20 -->
+  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.20/libs/cn/index.js"></script>
 
   <script>
-    // 检查配置
-    if (CONFIG.token === 'YOUR_TOKEN_HERE') {
-      document.getElementById('loading-screen').innerHTML = `
-        <div class="logo">⚠️</div>
-        <h1 style="color:white;font-size:18px;">请先配置Token</h1>
-        <p style="color:rgba(255,255,255,0.8);font-size:13px;text-align:center;padding:0 32px;">
-          打开HTML文件，将 CONFIG.token 替换为你的扣子个人访问令牌<br>
-          将 CONFIG.botId 替换为你的Bot ID
-        </p>
-      `;
-      throw new Error('请先配置Token和Bot ID');
-    }
-
-    // 初始化 Chat SDK（新版配置格式）
     try {
-      const cozeWebSDK = new CozeWebSDK.WebChatClient({
+      new CozeWebSDK.WebChatClient({
         config: {
-          botId: CONFIG.botId,
+          bot_id: '7637385009837506595',
+        },
+        componentProps: {
+          title: '医疗合规快查',
+          layout: 'mobile',
+          lang: 'zh-CN',
         },
         auth: {
           type: 'token',
-          token: CONFIG.token,
-          onRefreshToken: async () => CONFIG.token,
-        },
-        ui: {
-          base: {
-            layout: 'mobile',
-            lang: 'zh-CN',
+          token: 'pat_cEvmt5zQ2YL8WJzSRUihhV7IQoNe9A1XwyVqnHzDGZx3oXZhyCaW3NlYSGrP24Hn',
+          onRefreshToken: function () {
+            return 'pat_cEvmt5zQ2YL8WJzSRUihhV7IQoNe9A1XwyVqnHzDGZx3oXZhyCaW3NlYSGrP24Hn';
           },
-          chatBot: {
-            title: '医疗合规快查',
-          },
-          asstBtn: {
-            isNeed: true,
-          },
-        },
-        userInfo: {
-          id: '',
-          nickname: '',
         },
       });
 
-      // 隐藏加载页
-      setTimeout(() => {
-        const loading = document.getElementById('loading-screen');
+      setTimeout(function () {
+        var loading = document.getElementById('loading-screen');
         loading.classList.add('fade-out');
-        setTimeout(() => loading.style.display = 'none', 500);
+        setTimeout(function () { loading.style.display = 'none'; }, 500);
       }, 1500);
 
     } catch (err) {
-      console.error('SDK初始化失败:', err);
-      document.getElementById('loading-screen').innerHTML = `
-        <div class="logo">❌</div>
-        <h1 style="color:white;font-size:18px;">加载失败</h1>
-        <p style="color:rgba(255,255,255,0.8);font-size:13px;text-align:center;padding:0 32px;">
-          ${err.message || '请检查网络连接后重试'}
-        </p>
-      `;
+      document.getElementById('loading-screen').innerHTML =
+        '<div class="logo">❌</div>' +
+        '<h1 style="color:white;font-size:18px;">加载失败</h1>' +
+        '<p style="color:rgba(255,255,255,0.8);font-size:13px;text-align:center;padding:0 32px;">' +
+        (err.message || '请检查网络连接后重试') + '</p>';
     }
   </script>
 
